@@ -1,0 +1,5 @@
+@EndUserText.label: 'Service Definition for Sales Order'
+define service ZJU_SALESORDER_SD {
+  expose ZJU_VBAK_C;
+  expose ZJU_VBAP_C;
+}

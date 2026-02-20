@@ -1,0 +1,37 @@
+@Metadata.layer: #CORE
+annotate entity ZJU_VBAP_C with
+{
+
+  @UI.facet: [{ id:'VBAP',
+                 purpose: #STANDARD,
+                 type: #IDENTIFICATION_REFERENCE,
+                 label: 'Sales Order Item',
+                 position: 10
+                 }]
+
+  @UI.hidden: true
+  PosnrUuid;
+  @UI.hidden: true
+  VbelnUuid;
+
+  @UI.lineItem: [{ position: 10, importance: #HIGH, label: 'Sales Document Item'  }]
+  @UI.identification: [{ position: 10, importance: #HIGH, label: 'Sales Document Item'  }]
+  PosnrId;
+  @UI.lineItem: [{ position: 20, importance: #HIGH, label: 'Material Number'  }]
+  @UI.identification: [{ position: 20, importance: #HIGH, label: 'Material Number'  }]
+  Matnr;
+  @UI.lineItem: [{ position: 30, importance: #HIGH, label: 'Short text for sales order item'  }]
+  @UI.identification: [{ position: 30, importance: #HIGH, label: 'Short text for sales order item'  }]
+  Arktx;
+  @UI.lineItem: [{ position: 40, importance: #HIGH, label: 'Net Value of the Document Item '  }]
+  @UI.identification: [{ position: 40, importance: #HIGH, label: 'Net Value of the Document Item '  }]
+  Netwr;
+  //   CurrencyCode;
+  @UI.lineItem: [{ position: 50, importance: #HIGH, label: 'Record Creation Date'  }]
+  @UI.identification: [{ position: 50, importance: #HIGH, label: 'Record Creation Date'  }]
+  Erdat;
+  //   LocalLastChangedAt;
+  //   /* Associations */
+  //   _VBAK;
+
+}

@@ -1,0 +1,77 @@
+managed implementation in class zbp_ju_vbak_i unique;
+strict ( 2 );
+
+with draft;
+define behavior for ZJU_VBAK_I alias VBAK
+persistent table zju_vbak
+draft table zju_d_vbak
+lock master
+total etag LastChangedAt
+authorization master ( global, instance )
+etag master LocalLastChangedAt
+{
+  create ( authorization : global );
+//  create;
+  update;
+  delete;
+  field ( numbering : managed, readonly ) VbelnUuid;
+  field ( readonly ) VbelnId;
+  association _VBAP { create; with draft; }
+
+
+  draft action Discard;
+  draft action Edit;
+  draft action Resume;
+  draft action Activate optimized;
+  draft determine action Prepare;
+
+
+  determination setHeaderid on save { create; update; }
+
+
+  mapping for zju_vbak
+    {
+      VbelnUuid          = vbeln_uuid;
+      VbelnId            = vbeln_id;
+      Erdat              = erdat;
+      Auart              = auart;
+      Netwr              = netwr;
+      CurrencyCode       = currency_code;
+      Kunnr              = kunnr;
+      BukrsVf            = bukrs_vf;
+      LocalCreatedBy     = local_created_by;
+      LocalCreatedAt     = local_created_at;
+      LocalLastChangedBy = local_last_changed_by;
+      LocalLastChangedAt = local_last_changed_at;
+      LastChangedAt      = last_changed_at;
+    }
+}
+
+define behavior for ZJU_VBAP_I alias VBAP
+persistent table zju_vbap
+draft table zju_d_vbap
+lock dependent by _VBAK
+authorization dependent by _VBAK
+etag master LocalLastChangedAt
+{
+  update;
+  delete;
+  field ( readonly ) VbelnUuid;
+  field ( numbering : managed, readonly ) PosnrUuid;
+  //  field( readonly) PosnrId
+  association _VBAK { with draft; }
+
+
+  mapping for zju_vbap
+    {
+      PosnrUuid          = posnr_uuid;
+      VbelnUuid          = parent_uuid;
+      PosnrId            = posnr_id;
+      Matnr              = matnr;
+      Arktx              = arktx;
+      Netwr              = netwr;
+      CurrencyCode       = currency_code;
+      Erdat              = erdat;
+      LocalLastChangedAt = local_last_changed_at;
+    }
+}

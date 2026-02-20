@@ -1,0 +1,29 @@
+projection;
+strict ( 2 );
+
+use draft;
+define behavior for ZJU_VBAK_C alias VBAK
+{
+
+  use create;
+  use update;
+  use delete;
+
+
+  use action Activate;
+  use action Discard;
+  use action Edit;
+  use action Prepare;
+  use action Resume;
+
+
+  use association _VBAP { create; with draft; }
+}
+
+define behavior for ZJU_VBAP_C alias VBAP
+{
+  use update;
+  use delete;
+
+  use association _VBAK { with draft; }
+}
